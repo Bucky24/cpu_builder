@@ -1,0 +1,14 @@
+{
+    "image": "/assets/images/and_gate.png",
+    "width": 64,
+    "height": 64,
+    "input_wires": [
+        { "x": 0, "y": 17 },
+        { "x": 0, "y": 47 }
+    ],
+    "output_wires": [
+        { "x": 64, "y": 32 }
+    ],
+    "operation": "$0 & $1",
+    "name": "AND_2"
+}

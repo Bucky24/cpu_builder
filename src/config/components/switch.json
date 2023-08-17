@@ -1,0 +1,16 @@
+{
+    "image": "/assets/images/switch.png",
+    "width": 64,
+    "height": 64,
+    "input_wires": [],
+    "output_wires": [
+        { "x": 64, "y": 30 }
+    ],
+    "operation": "$on & 1",
+    "name": "SWITCH",
+    "activate": {
+        "type": "set_variable",
+        "variable": "on",
+        "value": 1
+    }
+}
