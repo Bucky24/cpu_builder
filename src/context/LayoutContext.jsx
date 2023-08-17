@@ -10,18 +10,34 @@ export function LayoutProvider({ children }) {
             type: 'AND_2',
             x: 200,
             y: 200,
-            connections: [],
+            connections: [[
+                { id: 2, output: 0 },
+            ], []],
+            processed: false,
+            variables: {},
+            inputs: [],
+            outputs: [],
         },
         {
             id: 2,
             type: 'SWITCH',
             x: 100,
             y: 100,
-            connections: [[
-                { id: 1, input: 0 },
-            ]],
+            connections: [],
+            processed: false,
+            variables: {},
+            inputs: [],
+            outputs: [],
         }
     ]);
+
+    const processItem = () => {
+
+    }
+
+    const processItems = () => {
+
+    }
 
     const value = {
         items,
