@@ -9,6 +9,6 @@
     "output_wires": [
         { "x": 64, "y": 32 }
     ],
-    "operation": "$0 & $1",
+    "operations": ["$0 & $1"],
     "name": "AND_2"
 }

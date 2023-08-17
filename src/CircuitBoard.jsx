@@ -70,31 +70,33 @@ export default function CircuitBoard() {
             const allConnections = [];
 
             for (let wire=0;wire<item.connections.length;wire++) {
-                for (const connection of item.connections[wire]) {
-                    const connectsTo = itemsById[connection.id];
-
-                    if (!connectsTo) {
-                        continue;
-                    }
-
-                    const connectsToData = config.components[connectsTo.type];
-
-                    if (!connectsToData) {
-                        continue;
-                    }
-
-                    const toWire = connectsToData.output_wires[connection.output];
-                    const fromWire = componentData.input_wires[wire];
-
-                    allConnections.push(<Line
-                        key={`from_${index}_${wire}_to_${connection.id}_${connection.input}`}
-                        x={fromWire.x + item.x}
-                        y={fromWire.y + item.y}
-                        x2={toWire.x + connectsTo.x}
-                        y2={toWire.y + connectsTo.y}
-                        color="#000"
-                    />);
+                const connection = item.connections[wire];
+                if (!connection) {
+                    continue;
                 }
+                const connectsTo = itemsById[connection.id];
+
+                if (!connectsTo) {
+                    continue;
+                }
+
+                const connectsToData = config.components[connectsTo.type];
+
+                if (!connectsToData) {
+                    continue;
+                }
+
+                const toWire = connectsToData.output_wires[connection.output];
+                const fromWire = componentData.input_wires[wire];
+
+                allConnections.push(<Line
+                    key={`from_${index}_${wire}_to_${connection.id}_${connection.input}`}
+                    x={fromWire.x + item.x}
+                    y={fromWire.y + item.y}
+                    x2={toWire.x + connectsTo.x}
+                    y2={toWire.y + connectsTo.y}
+                    color="#000"
+                />);
             }
 
             return allConnections;

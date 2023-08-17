@@ -6,8 +6,11 @@
     "output_wires": [
         { "x": 64, "y": 30 }
     ],
-    "operation": "$on & 1",
+    "operations": ["$on & 1"],
     "name": "SWITCH",
+    "default_variables": {
+        "on": 0
+    },
     "activate": {
         "type": "set_variable",
         "variable": "on",
