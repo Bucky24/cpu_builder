@@ -12,9 +12,10 @@
         "vite": "^4.2.0"
     },
     "dependencies": {
+        "@bucky24/react-canvas": "1.7.0",
+        "@bucky24/toolbox": "^0.1.0",
         "prop-types": "15.7.2",
         "react": "17.0.1",
-        "react-dom": "17.0.1",
-        "@bucky24/react-canvas": "1.7.0"
+        "react-dom": "17.0.1"
     }
 }

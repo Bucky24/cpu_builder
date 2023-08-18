@@ -4,6 +4,9 @@ dependencies:
   '@bucky24/react-canvas':
     specifier: 1.7.0
     version: 1.7.0
+  '@bucky24/toolbox':
+    specifier: ^0.1.0
+    version: 0.1.0
   prop-types:
     specifier: 15.7.2
     version: 15.7.2
@@ -252,6 +255,10 @@ packages:
     resolution: {integrity: sha512-Iv6VzHnTxZPNXhhmBav6e8HS63FK6pGViAPFYS6PpYv9+oT1R5yw70QJq8bWy10GXFYZNftOG/loZ4wmVMEJNg==}
     dependencies:
       prop-types: 15.7.2
+    dev: false
+
+  /@bucky24/toolbox@0.1.0:
+    resolution: {integrity: sha512-pFuk5VjEzBJRQw5hRNVE/XezGSv/6azQTBPzUttIpCNN9i8nPVq0L2yFsgzQlssjVZkrMo2oK+r1GaGjOO1AAA==}
     dev: false
 
   /@esbuild/android-arm64@0.17.19:

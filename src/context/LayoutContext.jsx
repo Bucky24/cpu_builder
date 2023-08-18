@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import config from '../config';
 import processOperation from '../../utils/processOperation';
+import useRender from '../hooks/useRender';
 
 const LayoutContext = React.createContext({});
 export default LayoutContext;
 
 export function LayoutProvider({ children }) {
-    const [items, setItems] = useState([
+    const render = useRender();
+    const itemsRef = useRef([
         {
             id: 1,
             type: 'AND_2',
@@ -15,8 +17,8 @@ export function LayoutProvider({ children }) {
             y: 200,
             connections: [{ id: 2, output: 0 }, null],
             variables: {},
-            inputs: [],
-            outputs: [],
+            inputs: [0,0],
+            outputs: [0],
         },
         {
             id: 2,
@@ -28,7 +30,7 @@ export function LayoutProvider({ children }) {
                 on: 0,
             },
             inputs: [],
-            outputs: [],
+            outputs: [0],
         }
     ]);
 
@@ -38,7 +40,7 @@ export function LayoutProvider({ children }) {
         // then go through each item again and update the input values from the
         // connected outputs
 
-        for (const item of items) {
+        for (const item of itemsRef.current) {
             const componentData = config.components[item.type];
 
             if (!componentData) {
@@ -68,14 +70,14 @@ export function LayoutProvider({ children }) {
             }
         }
 
-        const itemsById = items.reduce((obj, item) => {
+        const itemsById = itemsRef.current.reduce((obj, item) => {
             return {
                 ...obj,
                 [item.id]: item,
             };
         }, {});
 
-        for (const item of items) {
+        for (const item of itemsRef.current) {
             // pull input data from freshly computed items
             for (let i=0;i<item.connections.length;i++) {
                 if (!item.connections[i]) {
@@ -91,7 +93,39 @@ export function LayoutProvider({ children }) {
             }
         }
 
-        setItems([...items]);
+        render();
+    }
+
+    const takeAction = (item, action) => {
+        const itemData = config.components[item.type];
+
+        if (!itemData) {
+            return;
+        }
+        const actionData = itemData.actions?.[action]
+        if (!actionData) {
+            return;
+        }
+
+        switch (actionData.type) {
+            case "toggle_variable":
+                const varName = actionData.variable;
+                let value = item.variables[varName];
+                if (!value) {
+                    value = 0;
+                }
+
+                if (value == 0) value = 1;
+                else value = 0;
+
+                item.variables[varName] = value;
+                break;
+            default:
+                console.error("Unknown action type " + actionData.type);
+                return;
+        }
+
+        processItems();
     }
 
     useEffect(() => {
@@ -99,13 +133,15 @@ export function LayoutProvider({ children }) {
     }, []);
 
     const value = {
-        items,
-        itemsById: items.reduce((obj, item) => {
+        items: itemsRef.current,
+        itemsById: itemsRef.current.reduce((obj, item) => {
             return {
                 ...obj,
                 [item.id]: item,
             };
         }, {}),
+        takeAction,
+        processItems,
     };
 
     return <LayoutContext.Provider value={value}>

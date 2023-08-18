@@ -11,9 +11,10 @@
     "default_variables": {
         "on": 0
     },
-    "activate": {
-        "type": "set_variable",
-        "variable": "on",
-        "value": 1
+    "actions": {
+        "click": {
+            "type": "toggle_variable",
+            "variable": "on"
+        }
     }
 }

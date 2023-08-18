@@ -30,13 +30,14 @@ export default function CircuitBoard() {
             }
 
             return componentData.input_wires.map(({ x, y }, index2) => {
+                const active = item.inputs[index2];
                 return <Rect
                     key={`item_${index}_input_${index2}`}
                     x={item.x + x - 5}
                     y={item.y + y - 5}
                     x2={item.x + x + 5}
                     y2={item.y + y + 5}
-                    color="#f00"
+                    color={active ? "#0f0" : "#f00"}
                     fill={true}
                 />;
             });
@@ -49,13 +50,14 @@ export default function CircuitBoard() {
             }
 
             return componentData.output_wires.map(({ x, y }, index2) => {
+                const active = item.outputs[index2];
                 return <Rect
                     key={`item_${index}_output_${index2}`}
                     x={item.x + x - 5}
                     y={item.y + y - 5}
                     x2={item.x + x + 5}
                     y2={item.y + y + 5}
-                    color="#0f0"
+                    color={active ? "#0f0" : "#f00"}
                     fill={true}
                 />;
             });
