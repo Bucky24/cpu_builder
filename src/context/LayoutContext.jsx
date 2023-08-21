@@ -89,6 +89,8 @@ export function LayoutProvider({ children }) {
                     result = outputItem.outputs[item.connections[i].output];
                 }
 
+                //console.log("setting input ", i, "to ", result);
+
                 item.inputs[i] = result;
             }
         }
