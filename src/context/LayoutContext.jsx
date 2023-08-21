@@ -110,12 +110,30 @@ export function LayoutProvider({ children }) {
         render();
     }
 
+    const selectItem = (itemId) => {
+        for (const item of itemsRef.current) {
+            item.selected = item.id == itemId;
+        }
+        render();
+    }
+
     const takeAction = (item, action) => {
         const itemData = config.components[item.type];
 
         if (!itemData) {
             return;
         }
+
+        const last = item.lastClicked || 0;
+        const now = Date.now();
+        const sinceLast = now - last;
+        item.lastClicked = now;
+        console.log(sinceLast);
+        if (sinceLast > 200) {
+            selectItem(item.id);
+            return;
+        }
+
         const actionData = itemData.actions?.[action]
         if (!actionData) {
             return;

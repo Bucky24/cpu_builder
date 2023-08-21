@@ -1,5 +1,5 @@
 import { Image, Line, Rect } from "@bucky24/react-canvas";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import LayoutContext from "./context/LayoutContext";
 import config from './config';
@@ -13,14 +13,23 @@ export default function CircuitBoard() {
             if (!componentData) {
                 return null;
             }
-            return <Image
-                key={`item_${index}`}
-                src={componentData.image}
-                width={componentData.width}
-                height={componentData.height}
-                x={item.x}
-                y={item.y}
-            />
+            return <React.Fragment key={`item_${index}`}>
+                <Image
+                    src={componentData.image}
+                    width={componentData.width}
+                    height={componentData.height}
+                    x={item.x}
+                    y={item.y}
+                />
+                {item.selected && <Rect
+                    x={item.x}
+                    y={item.y}
+                    x2={item.x+componentData.width}
+                    y2={item.y+componentData.height}
+                    color="#f00"
+                    fill={false}
+                />}
+            </React.Fragment>
         })}
 
         {items.map((item, index) => {
