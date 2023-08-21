@@ -15,7 +15,7 @@ export function LayoutProvider({ children }) {
             type: 'AND_2',
             x: 200,
             y: 200,
-            connections: [{ id: 2, output: 0 }, null],
+            connections: [{ id: 2, output: 0 }, {id: 3, output: 0}],
             variables: {},
             inputs: [0,0],
             outputs: [0],
@@ -31,7 +31,19 @@ export function LayoutProvider({ children }) {
             },
             inputs: [],
             outputs: [0],
-        }
+        },
+        {
+            id: 3,
+            type: 'SWITCH',
+            x: 100,
+            y: 300,
+            connections: [],
+            variables: {
+                on: 0,
+            },
+            inputs: [],
+            outputs: [0],
+        },
     ]);
 
     const processItems = () => {

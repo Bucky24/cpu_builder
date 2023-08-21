@@ -9,7 +9,7 @@ import config from './config';
 
 export default function App() {
 	const [size, setSize] = useState({ width: 0, height: 0 });
-	const { items, takeAction } = useContext(LayoutContext);
+	const { items, takeAction, processItems } = useContext(LayoutContext);
 
 	const resize = () => {
 		setSize({
@@ -71,8 +71,8 @@ export default function App() {
 			<Rect x={0} y={0} x2={size.width} y2={size.height} color="#fff" fill={true} />
 			<CircuitBoard />
 		</Canvas>
-		<div style={{ position: 'absolute' }}>
-			
+		<div style={{ position: 'absolute', top: 0, left: 0 }}>
+			<button onClick={processItems}>Step</button>
 		</div>
 	</div>);
 }
