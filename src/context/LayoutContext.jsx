@@ -124,16 +124,6 @@ export function LayoutProvider({ children }) {
             return;
         }
 
-        const last = item.lastClicked || 0;
-        const now = Date.now();
-        const sinceLast = now - last;
-        item.lastClicked = now;
-        console.log(sinceLast);
-        if (sinceLast > 200) {
-            selectItem(item.id);
-            return;
-        }
-
         const actionData = itemData.actions?.[action]
         if (!actionData) {
             return;
@@ -174,6 +164,16 @@ export function LayoutProvider({ children }) {
         }, {}),
         takeAction,
         processItems,
+        selectItem: (item) => {
+            selectItem(item);
+            render();
+        },
+        unselectAll: () => {
+            itemsRef.current.map((item) => {
+                item.selected = false;
+            });
+            render();
+        },
     };
 
     return <LayoutContext.Provider value={value}>
